@@ -16,6 +16,11 @@ export class GamesRepository implements IGamesRepository {
     return this.repository
       .createQueryBuilder()
       // Complete usando query builder
+      .select("games") 
+      .from(Game, "games") 
+      .where("games.title = :title", { title: param })
+      .getMany();
+
   }
 
   async countAllGames(): Promise<[{ count: string }]> {
@@ -26,5 +31,9 @@ export class GamesRepository implements IGamesRepository {
     return this.repository
       .createQueryBuilder()
       // Complete usando query builder
+      .select("users") 
+      .from(User, "users") 
+      .where("games.id = :id", { id: id })
+      .getMany();
   }
 }
